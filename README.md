@@ -6,7 +6,7 @@ Basic conten is from ["openfrontier gerrit"](https://github.com/openfrontier/doc
 So this image is mainly adding the "HTTP AUTH" based on Openfrontier Gerrit.
 
 ## Setup HTTP auth option
-  docker run --name thincal-gerrit \
+    docker run --name thincal-gerrit \
     -p 8080:80 -p 29418:29418 \
     -e SSH_PORT=29418 \
     -e AUTH_TYPE=HTTP \
