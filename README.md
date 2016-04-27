@@ -15,5 +15,7 @@ So this image is mainly adding the "HTTP AUTH" based on Openfrontier Gerrit.
     -d thincal/gerrit-docker:2.12
 
 > `SSH_PORT` must be same as the `-p SSH_PORT:SSH_PORT`
+
 > `HTTP_PORT` must be same as the `-p HTTP_PORT:80`
+
 > `HTTP_URL` `HTTP_PORT` is needed ONLY if using HTTP auth
