@@ -1,6 +1,6 @@
-# docker-gerrit
+# Gerrit Docker image
 
-Basic conten is from ["openfrontier gerrit"](https://github.com/openfrontier/docker-gerrit), where it is said that:
+Basic content is from ["openfrontier gerrit"](https://github.com/openfrontier/docker-gerrit), where it is said that:
 >  HTTP authentication is not possible
 
 So this image is mainly adding the "HTTP AUTH" based on Openfrontier Gerrit.
