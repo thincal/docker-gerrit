@@ -14,7 +14,6 @@ echo "gerrit-entrypoint.sh executed... $@"
 #Initialize gerrit if gerrit site dir is empty.
 #This is necessary when gerrit site is in a volume.
 if [ "$1" = "/gerrit-start.sh" ]; then
-  echo "gerrit-entrypoint.sh executed 02..."
 
   # If you're mounting ${GERRIT_SITE} to your host, you this will default to root.
   # This obviously ensures the permissions are set correctly for when gerrit starts.
@@ -123,18 +122,20 @@ if [ "$1" = "/gerrit-start.sh" ]; then
 
   # section HTTP
   if [ "${AUTH_TYPE}" = 'HTTP' ]; then
+    echo "configure HTTP auth..."
+
     set_gerrit_config auth.type "${AUTH_TYPE}"
 
     # parameter processing
-    if [ -z "${HTTP_PORT}" ]; then 
+    if [ ! -z "${HTTP_PORT}" ]; then
+
       [ -z "${HTTP_URL}" ] || WEBURL="${HTTP_URL}:${HTTP_PORT}"
 
       HTTPD_LISTENURL="proxy-http://localhost:${HTTP_PORT}/"
       
       # Update the http port in httpd.conf
-      httpd_conf_file=/etc/apache2/httpd.conf
-      cp ${httpd_conf_file} /tmp/httpd.conf
-      sed "s#HTTP_PORT#${HTTP_PORT}#" /tmp/httpd.conf > ${httpd_conf_file}
+      sed -i "s#HTTP_PORT#${HTTP_PORT}#" /etc/apache2/httpd.conf
+      cat /etc/apache2/httpd.conf
     fi
 
     # apply the settings...
