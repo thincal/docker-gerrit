@@ -1,5 +1,5 @@
-#FROM java:openjdk-7-jre
-FROM ubuntu-ssh-jre:14.04
+FROM java:openjdk-7-jre
+#FROM ubuntu-ssh-jre:14.04
 
 MAINTAINER LS <thincal@outlook.com>
 
@@ -15,10 +15,12 @@ ENV GERRIT_INIT_ARGS ""
 # regardless of whatever dependencies get added
 RUN useradd -m -d "$GERRIT_HOME" -U $GERRIT_USER
 
-# Grab gosu for easy step-down from root
+# Install tools (git curl apache2 etc.)
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends gitweb
-RUN apt-get install -y curl apache2-utils
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends gitweb curl apache2-utils
+
+# Grab gosu for easy step-down from root
 COPY gosu-amd64 /usr/local/bin/gosu
 RUN chmod +x /usr/local/bin/gosu
 
