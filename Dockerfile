@@ -52,6 +52,11 @@ RUN curl \
     -L ${GERRITFORGE_URL}/job/plugin-gerrit-oauth-provider-gh-master/${GERRITFORGE_ARTIFACT_DIR}/gerrit-oauth-provider/gerrit-oauth-provider.jar \
     -o ${GERRIT_HOME}/gerrit-oauth-provider.jar
 
+#download-commands plugin
+RUN curl \
+    -L ${GERRITFORGE_URL}/job/plugin-download-commands-stable-2.11/${GERRITFORGE_ARTIFACT_DIR}/download-commands/download-commands.jar \
+    -o ${GERRIT_HOME}/download-commands.jar
+
 # Ensure the entrypoint scripts are in a fixed location
 ADD gerrit-entrypoint.sh /
 ADD gerrit-start.sh /

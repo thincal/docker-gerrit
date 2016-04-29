@@ -1,17 +1,14 @@
 #!/bin/bash
-docker rm -f thincal-gerrit
+docker rm -f ceyes-gerrit
 
-#docker run --name gerrit-ls -d -p 8080:80 -p 29418:29418 \
-#    -e WEBURL=http://192.168.0.141:8080 \
-#    -e AUTH_TYPE=HTTP \
-#    -e HTTPD_LISTENURL=proxy-http://localhost:8080/ \
-#    liusong/gerrit-docker:2.12
+web_port=8081
+ssh_port=29418
 
-docker run --name thincal-gerrit \
-    -v ~/gerrit_volume:/var/gerrit/review_site \
-    -p 8081:80 -p 29419:29419 \
-    -e SSH_PORT=29419 \
+docker run --name ceyes-gerrit \
+    -v /home/ceyes/work/ci/gerrit/gerrit-repos:/var/gerrit/review_site \
+    -p ${web_port}:80 -p ${ssh_port}:${ssh_port} \
+    -e SSH_PORT=${ssh_port} \
     -e AUTH_TYPE=HTTP \
-    -e HTTP_URL=http://192.168.0.141 \
-    -e HTTP_PORT=8081 \
+    -e HTTP_URL=123.56.234.200 \
+    -e HTTP_PORT=${web_port} \
     -d thincal/gerrit-docker:2.12

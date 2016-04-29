@@ -31,8 +31,9 @@ if [ "$1" = "/gerrit-start.sh" ]; then
   # Install external plugins
   cp -f ${GERRIT_HOME}/delete-project.jar ${GERRIT_SITE}/plugins/delete-project.jar
   cp -f ${GERRIT_HOME}/events-log.jar ${GERRIT_SITE}/plugins/events-log.jar
+  cp -f ${GERRIT_HOME}/download-commands.jar ${GERRIT_SITE}/plugins/download-commands.jar
 
-  # Install gerrit password
+  # Install gerrit http based password
   mkdir -p ${GERRIT_SITE}/etc/private/
   cp -f /gerrit.passwords ${GERRIT_SITE}/etc/private/gerrit.passwords
   rm -f /gerrit.passwords
@@ -125,13 +126,14 @@ if [ "$1" = "/gerrit-start.sh" ]; then
     echo "configure HTTP auth..."
 
     set_gerrit_config auth.type "${AUTH_TYPE}"
+    #set_gerrit_config auth.logoutUrl "http://aa:aa@${HTTP_URL}:${HTTP_PORT}/logout"
 
     # parameter processing
     if [ ! -z "${HTTP_PORT}" ]; then
 
-      [ -z "${HTTP_URL}" ] || WEBURL="${HTTP_URL}:${HTTP_PORT}"
+      [ -z "${HTTP_URL}" ] || WEBURL="http://${HTTP_URL}:${HTTP_PORT}"
 
-      HTTPD_LISTENURL="proxy-http://localhost:${HTTP_PORT}/"
+      HTTPD_LISTENURL="proxy-http://localhost:${HTTP_PORT}"
       
       # Update the http port in httpd.conf
       sed -i "s#HTTP_PORT#${HTTP_PORT}#" /etc/apache2/httpd.conf
