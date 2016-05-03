@@ -9,6 +9,6 @@ docker run --name ceyes-gerrit \
     -p ${web_port}:80 -p ${ssh_port}:${ssh_port} \
     -e SSH_PORT=${ssh_port} \
     -e AUTH_TYPE=HTTP \
-    -e HTTP_URL=123.56.234.200 \
+    -e HTTP_URL=192.168.0.141 \
     -e HTTP_PORT=${web_port} \
     -d thincal/gerrit-docker:2.12
