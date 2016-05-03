@@ -77,7 +77,7 @@ RUN ln -s /etc/apache2/mods-available/proxy.conf /etc/apache2/mods-enabled/proxy
     ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/proxy.load && \
     ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/proxy_http.load
 
-ADD gerrit.passwords /
+#ADD gerrit.passwords /
 
 ENTRYPOINT ["/gerrit-entrypoint.sh"]
 

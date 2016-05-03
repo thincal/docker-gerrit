@@ -29,14 +29,15 @@ if [ "$1" = "/gerrit-start.sh" ]; then
   fi
 
   # Install external plugins
+  gosu ${GERRIT_USER} mkdir -p ${GERRIT_SITE}/plugins/
   cp -f ${GERRIT_HOME}/delete-project.jar ${GERRIT_SITE}/plugins/delete-project.jar
   cp -f ${GERRIT_HOME}/events-log.jar ${GERRIT_SITE}/plugins/events-log.jar
   cp -f ${GERRIT_HOME}/download-commands.jar ${GERRIT_SITE}/plugins/download-commands.jar
 
   # Install gerrit http based password
-  mkdir -p ${GERRIT_SITE}/etc/private/
-  cp -f /gerrit.passwords ${GERRIT_SITE}/etc/private/gerrit.passwords
-  rm -f /gerrit.passwords
+  #mkdir -p ${GERRIT_HOME}/private/
+  #cp -f /gerrit.passwords ${GERRIT_HOME}/private/gerrit.passwords
+  #rm -f /gerrit.passwords
 
   # Provide a way to customise this image
   echo
