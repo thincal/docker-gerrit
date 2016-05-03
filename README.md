@@ -10,11 +10,11 @@ So this image is mainly adding the "HTTP AUTH" based on Openfrontier Gerrit.
     ssh_port=29418
     
     docker run --name thincal-gerrit \
-    -p 8089:80 -p 29456:29456 \
-    -e SSH_PORT=29456 \
+    -p ${http_port}:80 -p ${ssh_port}:${ssh_port} \
+    -e SSH_PORT=${ssh_port} \
     -e AUTH_TYPE=HTTP \
     -e HTTP_URL=http://192.168.0.141 \
-    -e HTTP_PORT=8089 \
+    -e HTTP_PORT=${http_port} \
     -d thincal/gerrit-docker:2.12
 
 > `SSH_PORT` must be same as the `-p SSH_PORT:SSH_PORT`
